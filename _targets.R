@@ -13,12 +13,13 @@ pkgs <- c(
   "labelled", # labeling data
   "pointblank", # data validation and exploration
   "rvest", # get data from web pages
-  "tidyverse", # Data management
   "data.table", # fast data management
   "fs", # to work wit hthe file system
   "zip", # manipulate zip files
   "gt", #for nice tables
-  "quarto"
+  "quarto",
+  "tidyverse", # Data management
+  "duckplyr"
 )
 
 invisible(lapply(pkgs, library, character.only = TRUE))
@@ -43,12 +44,4 @@ if (!fs::file_exists("data.zip")) {
   )
 }
 
-#Create data directory
-if (!dir.exists("data")) dir.create("data")
-
-#Add the needed data files to the directory
-unzip(
-  zipfile = "data.zip", 
-  files = ("data-fixed/patients.csv"),
-  exdir = "data"
-)
+zip::unzip("data.zip")
